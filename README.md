@@ -1,4 +1,4 @@
-# RecursiveDBTree Component <img src="https://img.shields.io/badge/Versão-0.0.1-green"> <img src="https://img.shields.io/badge/Licença-MIT-success"> <img src="https://img.shields.io/badge/Adianti-7.x-blue"> <img src="https://img.shields.io/badge/PHP-7.x-blueviolet"> <img src="https://img.shields.io/badge/PHP-8.x-blueviolet">
+# RecursiveDBTree Component <img src="https://img.shields.io/badge/Version-0.0.1-green"> <img src="https://img.shields.io/badge/License-MIT-success"> <img src="https://img.shields.io/badge/Adianti-7.x-blue"> <img src="https://img.shields.io/badge/PHP-7%20or%20higher-blueviolet">
 
 The RecursiveDBTree component is a versatile and efficient solution tailored for the Adianti Framework. It provides developers with a powerful toolset to manage hierarchical data structures seamlessly. This component facilitates intuitive tree navigation and manipulation within your web application.
 
