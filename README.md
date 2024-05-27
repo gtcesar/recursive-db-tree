@@ -17,23 +17,24 @@ Run the following command:
 
 ## Usage Example - RecursiveDBTree
 ```sql
-CREATE TABLE IF NOT EXISTS `segmento` (
+CREATE TABLE IF NOT EXISTS `segment` (
   `id` int(11) NOT NULL,
-  `segmento_id` int(11) DEFAULT NULL,
-  `descricao` varchar(200) COLLATE utf8_unicode_ci NOT NULL
+  `parent_segment_id` int(11) DEFAULT NULL,
+  `description` varchar(200) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `segmento` (`id`, `segmento_id`, `descricao`) VALUES
-(1, NULL, 'Transporte'),
-(2, 1, 'Executivo'),
-(3, 1, 'Fracionado'),
-(4, NULL, 'Informática'),
+INSERT INTO `segment` (`id`, `parent_segment_id`, `description`) VALUES
+(1, NULL, 'Transportation'),
+(2, 1, 'Executive'),
+(3, 1, 'Fractional'),
+(4, NULL, 'Information Technology'),
 (5, 4, 'Software'),
-(6, 4, 'Suporte e manutenção'),
-(7, NULL, 'Varejo'),
-(8, 7, 'Materiais de limpeza'),
-(16, 8, 'Químicos'),
-(17, 16, 'Controlados');
+(6, 4, 'Support and Maintenance'),
+(7, NULL, 'Retail'),
+(8, 7, 'Cleaning Supplies'),
+(16, 8, 'Chemicals'),
+(17, 16, 'Controlled');
+
 
 ```
 ```php
@@ -51,9 +52,9 @@ class SegmentoForm extends TPage
         parent::__construct();
         
         // creates a panel
-        $panel = new TPanelGroup('Segmentos');
+        $panel = new TPanelGroup('Segment');
        
-        $segmentos = new RecursiveDBTree('segmento', 'DATABASE', 'Segmento', 'id', 'segmento_id', 'descricao', 'id asc');
+        $segmentos = new RecursiveDBTree('segment', 'DATABASE', 'Segment', 'id', 'parent_segment_id', 'description', 'id asc');
         $segmentos->collapse();
         $segmentos->setItemAction(new TAction(array($this, 'onSelect')));
         
@@ -74,5 +75,5 @@ class SegmentoForm extends TPage
 
 }
 ```
-## Resultado
+## Result
 <img src="https://github.com/gtcesar/recursive-db-tree/blob/main/images/RecursiveDBTree.png?raw=true">
