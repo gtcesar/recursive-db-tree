@@ -1,0 +1,21 @@
+{
+    "name": "gtcesar/recursive-db-tree",
+    "description": "A versatile and efficient recursive database tree component for Adianti Framework.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Augusto César da Costa Marques",
+            "email": "gtcesar@hotmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0 || ^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gtcesar\\RecursiveDBTree\\": "src/"
+        }
+    }
+}
+
