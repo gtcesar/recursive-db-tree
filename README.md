@@ -1,9 +1,9 @@
 # RecursiveDBTree plugin 
 
-![Static Badge](https://img.shields.io/badge/Version-0.0.2-green)(https://github.com/gtcesar/recursive-db-tree)
-![Static Badge](https://img.shields.io/badge/License-MIT-success)(https://opensource.org/license/mit)
+[![Static Badge](https://img.shields.io/badge/Version-0.0.2-green)](https://github.com/gtcesar/recursive-db-tree)
+[![Static Badge](https://img.shields.io/badge/License-MIT-success)](https://opensource.org/license/mit)
 [![Adianti Framework](https://img.shields.io/badge/Adianti%20Framework-Adianti%20Solutions-blue.svg)](https://www.adianti.com.br/)
-![Static Badge](https://img.shields.io/packagist/php-v/rubix/ml.svg?style=flat&colorB=8892BF)(https://www.php.net/releases/7_4_0.php)
+[![Static Badge](https://img.shields.io/packagist/php-v/rubix/ml.svg?style=flat&colorB=8892BF)](https://www.php.net/releases/7_4_0.php)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6QPL893GX55J2)
 
 The RecursiveDBTree plugin is a versatile and efficient solution tailored for the Adianti Framework. It provides developers with a powerful toolset to manage hierarchical data structures seamlessly. This component facilitates intuitive tree navigation and manipulation within your web application.
