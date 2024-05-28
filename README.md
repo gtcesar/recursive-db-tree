@@ -12,6 +12,7 @@ The RecursiveDBTree plugin is a versatile and efficient solution tailored for th
 - **Efficient:** Optimized for performance and resource utilization.
 - **Intuitive Navigation:** Provides an intuitive interface for navigating through the tree structure.
 - **Easy Manipulation:** Allows for easy manipulation of tree elements, including adding, editing, and deleting nodes.
+- **Context Menu Options:** Offers context menu options for enhanced user interaction and management of tree nodes.
 
 ## Based on VanillaTree Library
 > This plugin is built upon the foundation of the [VanillaTree](https://github.com/finom/vanillatree) JavaScript library. Leveraging the capabilities of VanillaTree, the RecursiveDBTree component enhances the Adianti Framework by empowering developers to implement dynamic and interactive tree views effortlessly.
@@ -54,25 +55,35 @@ INSERT INTO `segment` (`id`, `parent_segment_id`, `description`) VALUES
 
 ```php
 
+/**
+ * Segment
+ *
+ * Represents a segment entity in the database.
+ * Extends TRecord, the base class for database records in Adianti Framework.
+ */
 class Segment extends TRecord
 {
-    const TABLENAME = 'segment';
-    const PRIMARYKEY= 'id';
-    const IDPOLICY =  'serial'; // {max, serial}
-    
-    
+    const TABLENAME = 'segment'; // Name of the database table
+    const PRIMARYKEY = 'id'; // Primary key field name
+    const IDPOLICY = 'serial'; // ID generation policy (max, serial)
+
     /**
      * Constructor method
+     *
+     * @param int|null $id The ID of the segment (optional)
+     * @param bool $callObjectLoad Whether to call the parent's load method (default: TRUE)
      */
     public function __construct($id = NULL, $callObjectLoad = TRUE)
     {
+        // Call the parent constructor to initialize the object
         parent::__construct($id, $callObjectLoad);
-        parent::addAttribute('parent_segment_id');
-        parent::addAttribute('description');
+        
+        // Add attributes to the record
+        parent::addAttribute('parent_segment_id'); // Parent segment ID
+        parent::addAttribute('description'); // Segment description
     }
-
-
 }
+
 ```
 
 ### Controller
@@ -82,21 +93,41 @@ class Segment extends TRecord
 
 use Gtcesar\RecursiveDBTree\RecursiveDBTree;
 
+/**
+ * SegmentTree
+ *
+ * This class represents a segment tree page.
+ * It displays a hierarchical structure of segments using RecursiveDBTree component.
+ * Users can interact with the segments by selecting, editing, deleting, or viewing them.
+ */
 class SegmentTree extends TPage
 {
-
+    /**
+     * Class constructor
+     * Creates the page and initializes its components
+     */
     function __construct()
     {
         parent::__construct();
         
-        $panel = new TPanelGroup('Segment Tree');
+        // Create a panel
+        $panel = new TPanelGroup('Segment');
        
-        $segment = new RecursiveDBTree('segment', 'DATABASE', 'Segment', 'id', 'parent_segment_id', 'description', 'id asc');
+        // Create a RecursiveDBTree instance to display segments
+        $segment = new RecursiveDBTree('segment', 'app', 'Segment', 'id', 'parent_segment_id', 'description', 'id asc');
         $segment->collapse();
+        
+        // Set an action when selecting an item
         $segment->setItemAction(new TAction(array($this, 'onSelect')));
+        
+        // Add options to the context menu
+        $segment->addContextMenuOption('Edit', new TAction([$this, 'onEdit']));
+        $segment->addContextMenuOption('Delete', new TAction([$this, 'onDelete']));
+        $segment->addContextMenuOption('View', new TAction([$this, 'onView']));
         
         $panel->add($segment);
         
+        // Wrap the page content using a vertical box
         $vbox = new TVBox;
         $vbox->style = 'width: 100%';
         $vbox->add($panel);
@@ -104,12 +135,43 @@ class SegmentTree extends TPage
         parent::add($vbox);
     }
     
+    /**
+     * Handle item selection
+     * Displays information about the selected item
+     */
     public function onSelect($param)
     {
         new TMessage('info', str_replace(',', '<br>', json_encode($param)));
     }    
+    
+    /**
+     * Handle item editing
+     * Displays information about the item being edited
+     */
+    public function onEdit($param)
+    {
+        new TMessage('info', str_replace(',', '<br>', json_encode($param)));
+    }    
 
+    /**
+     * Handle item deletion
+     * Displays information about the item being deleted
+     */
+    public function onDelete($param)
+    {
+        new TMessage('info', str_replace(',', '<br>', json_encode($param)));
+    }    
+
+    /**
+     * Handle item viewing
+     * Displays information about the item being viewed
+     */
+    public function onView($param)
+    {
+        new TMessage('info', str_replace(',', '<br>', json_encode($param)));
+    }  
 }
+
 ```
 
 ## Result
