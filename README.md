@@ -3,7 +3,7 @@
 ![Static Badge](https://img.shields.io/badge/Version-0.0.1-green)
 ![Static Badge](https://img.shields.io/badge/License-MIT-success)
 ![Static Badge](https://img.shields.io/badge/Adianti-7.x-blue)
-![Static Badge](https://img.shields.io/badge/PHP-7%20or%20higher-blueviolet)
+![Static Badge](https://img.shields.io/packagist/php-v/rubix/ml.svg?style=flat&colorB=8892BF)
 
 The RecursiveDBTree plugin is a versatile and efficient solution tailored for the Adianti Framework. It provides developers with a powerful toolset to manage hierarchical data structures seamlessly. This component facilitates intuitive tree navigation and manipulation within your web application.
 
