@@ -175,7 +175,9 @@ class SegmentTree extends TPage
 ```
 
 ## Result
-<img src="https://github.com/gtcesar/recursive-db-tree/blob/main/images/RecursiveDBTree.png?raw=true">
+> The result of the example
+<img src="https://github.com/gtcesar/recursive-db-tree/blob/main/images/img1.png?raw=true">
+<img src="https://github.com/gtcesar/recursive-db-tree/blob/main/images/img2.png?raw=true">
 
 ## License
 
