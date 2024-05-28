@@ -138,9 +138,9 @@ class RecursiveDBTree extends TElement
             $string_action = $this->itemAction->serialize(FALSE);
             $script->add('
             ' . $this->tagname . '.addEventListener("vtree-select", function(evt) {
-                __adianti_ajax_exec("' . $string_action . '&key=" + evt.detail.id);
+                __adianti_ajax_exec(`' . $string_action . '&key=${evt.detail.id}`);
             });
-            ');
+        ');
         }
 
         // Close the script tag
