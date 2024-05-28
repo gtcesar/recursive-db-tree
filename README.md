@@ -23,7 +23,7 @@ The RecursiveDBTree plugin is a versatile and efficient solution tailored for th
 > Run the following command:
 `composer require gtcesar/recursive-db-tree`
 
-## Usage Example - RecursiveDBTree
+## Usage Example
 ### SQL
 >Table definition for the segment table, including columns for id, parent_segment_id, and description.
 Insert statements to add data to the segment table, populating it with some examples of segments and their relationships.
