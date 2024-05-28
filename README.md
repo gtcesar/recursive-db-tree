@@ -50,7 +50,8 @@ INSERT INTO `segment` (`id`, `parent_segment_id`, `description`) VALUES
 
 ```
 ### Model
-> app/model/Segment.php
+> Create Model in app/model/Segment.php
+
 ```php
 
 class Segment extends TRecord
@@ -75,7 +76,7 @@ class Segment extends TRecord
 ```
 
 ### Controller
-> app/controller/SegmentTree.php
+> Create Controller in app/controller/SegmentTree.php
 
 ```php
 
@@ -90,11 +91,11 @@ class SegmentTree extends TPage
         
         $panel = new TPanelGroup('Segment Tree');
        
-        $segmentos = new RecursiveDBTree('segment', 'DATABASE', 'Segment', 'id', 'parent_segment_id', 'description', 'id asc');
-        $segmentos->collapse();
-        $segmentos->setItemAction(new TAction(array($this, 'onSelect')));
+        $segment = new RecursiveDBTree('segment', 'DATABASE', 'Segment', 'id', 'parent_segment_id', 'description', 'id asc');
+        $segment->collapse();
+        $segment->setItemAction(new TAction(array($this, 'onSelect')));
         
-        $panel->add($segmentos);
+        $panel->add($segment);
         
         $vbox = new TVBox;
         $vbox->style = 'width: 100%';
