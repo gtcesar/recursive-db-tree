@@ -1,4 +1,4 @@
-## RecursiveDBTree plugin 
+# RecursiveDBTree plugin 
 
 ![Static Badge](https://img.shields.io/badge/Version-0.0.1-green)
 ![Static Badge](https://img.shields.io/badge/License-MIT-success)
@@ -113,3 +113,9 @@ class SegmentTree extends TPage
 
 ## Result
 <img src="https://github.com/gtcesar/recursive-db-tree/blob/main/images/RecursiveDBTree.png?raw=true">
+
+## License
+
+MIT
+
+**Free Software, Hell Yeah!**
