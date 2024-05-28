@@ -43,7 +43,7 @@ INSERT INTO `segment` (`id`, `parent_segment_id`, `description`) VALUES
 
 use Gtcesar\RecursiveDBTree\RecursiveDBTree;
 
-class SegmentForm extends TPage
+class SegmentTree extends TPage
 {
     /**
      * Class constructor
@@ -54,7 +54,7 @@ class SegmentForm extends TPage
         parent::__construct();
         
         // creates a panel
-        $panel = new TPanelGroup('Segment');
+        $panel = new TPanelGroup('Segment Tree');
        
         $segmentos = new RecursiveDBTree('segment', 'DATABASE', 'Segment', 'id', 'parent_segment_id', 'description', 'id asc');
         $segmentos->collapse();
