@@ -22,6 +22,8 @@ The RecursiveDBTree plugin is a versatile and efficient solution tailored for th
 
 ## Usage Example - RecursiveDBTree
 ### SQL
+>Table definition for the segment table, including columns for id, parent_segment_id, and description.
+Insert statements to add data to the segment table, populating it with some examples of segments and their relationships.
 
 ```sql
 CREATE TABLE IF NOT EXISTS `segment` (
@@ -45,6 +47,7 @@ INSERT INTO `segment` (`id`, `parent_segment_id`, `description`) VALUES
 
 ```
 ### Model
+> app/model/Segment.php
 ```php
 
 class Segment extends TRecord
@@ -69,6 +72,8 @@ class Segment extends TRecord
 ```
 
 ### Controller
+> app/controller/SegmentTree.php
+
 ```php
 
 use Gtcesar\RecursiveDBTree\RecursiveDBTree;
