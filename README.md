@@ -11,15 +11,13 @@ The RecursiveDBTree plugin is a versatile and efficient solution tailored for th
 - **Easy Manipulation:** Allows for easy manipulation of tree elements, including adding, editing, and deleting nodes.
 
 ## Based on VanillaTree Library
-This plugin is built upon the foundation of the [VanillaTree](https://github.com/finom/vanillatree) JavaScript library. Leveraging the capabilities of VanillaTree, the RecursiveDBTree component enhances the Adianti Framework by empowering developers to implement dynamic and interactive tree views effortlessly.
+> This plugin is built upon the foundation of the [VanillaTree](https://github.com/finom/vanillatree) JavaScript library. Leveraging the capabilities of VanillaTree, the RecursiveDBTree component enhances the Adianti Framework by empowering developers to implement dynamic and interactive tree views effortlessly.
 
-
-> [!IMPORTANT]
 ## Adianti Framework Dependency
 > This plugin is built specifically for Adianti Framework. Make sure your project is using Adianti for seamless integration and optimal performance.
 
 ## Installation
-Run the following command:
+> Run the following command:
 `composer require gtcesar/recursive-db-tree`
 
 ## Usage Example - RecursiveDBTree
