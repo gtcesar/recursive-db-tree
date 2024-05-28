@@ -13,8 +13,10 @@ The RecursiveDBTree plugin is a versatile and efficient solution tailored for th
 ## Based on VanillaTree Library
 This plugin is built upon the foundation of the [VanillaTree](https://github.com/finom/vanillatree) JavaScript library. Leveraging the capabilities of VanillaTree, the RecursiveDBTree component enhances the Adianti Framework by empowering developers to implement dynamic and interactive tree views effortlessly.
 
+
+> [!IMPORTANT]
 ## Adianti Framework Dependency
-This plugin is built specifically for Adianti Framework. Make sure your project is using Adianti for seamless integration and optimal performance.
+> This plugin is built specifically for Adianti Framework. Make sure your project is using Adianti for seamless integration and optimal performance.
 
 ## Installation
 Run the following command:
