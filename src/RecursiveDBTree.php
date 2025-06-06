@@ -29,6 +29,16 @@ class RecursiveDBTree extends TElement
     protected $treeItems;
 
     /**
+     * @var string|null $iconField The field name for the icon class
+     */
+    private $iconField = null;
+
+    /**
+     * @var string|null $defaultTreeIconClass The default icon class for tree nodes
+     */
+    private $defaultTreeIconClass = null;
+
+    /**
      * @var string $tagName The HTML tag name of the main element
      */
     private $tagName;
@@ -74,8 +84,10 @@ class RecursiveDBTree extends TElement
      * @param string $labelField The table value to be used as label
      * @param string|null $orderColumn The column to order the fields (optional)
      * @param TCriteria|null $criteria The criteria (TCriteria object) to filter the model (optional)
+     * @param string|null $iconField The field name for the icon class (optional)
+     * @param string|null $defaultTreeIconClass The default icon class for tree nodes (optional)
      */
-    public function __construct($tagName, $databaseName, $modelName, $keyField, $parentKeyField, $labelField, $orderColumn = null, TCriteria $criteria = null)
+    public function __construct($tagName, $databaseName, $modelName, $keyField, $parentKeyField, $labelField, $orderColumn = null, TCriteria $criteria = null, $iconField = null, $defaultTreeIconClass = null)
     {
         parent::__construct('main');
         $this->id = 'tree_' . uniqid();
@@ -83,8 +95,20 @@ class RecursiveDBTree extends TElement
         $this->keyField = $keyField;
         $this->parentKeyField = $parentKeyField;
         $this->labelField = $labelField;
+        $this->iconField = $iconField;
+        $this->defaultTreeIconClass = $defaultTreeIconClass;
         $this->isCollapsed = false;
         $this->treeItems = AdiantiDatabaseWidgetTrait::getObjectsFromModel($databaseName, $modelName, $keyField, $orderColumn, $criteria);
+    }
+
+    /**
+     * Set default tree icon class
+     * This method allows setting a default icon for all tree nodes if no specific icon is provided by the $iconField.
+     * @param string $iconClass The icon class
+     */
+    public function setDefaultTreeIconClass($iconClass)
+    {
+        $this->defaultTreeIconClass = $iconClass;
     }
 
     /**
@@ -113,10 +137,11 @@ class RecursiveDBTree extends TElement
      *
      * @param string $label The label of the context menu option
      * @param mixed $action The action to be executed when the context menu option is selected
+     * @param string|null $iconClass The icon class for the context menu option (optional)
      */
-    public function addContextMenuOption($label, $action)
+    public function addContextMenuOption($label, $action, $iconClass = null)
     {
-        $this->contextMenuOptions[] = [$label, $action];
+        $this->contextMenuOptions[] = [$label, $action, $iconClass];
     }
 
     /**
@@ -166,8 +191,16 @@ class RecursiveDBTree extends TElement
             foreach ($this->contextMenuOptions as $index => $option) {
                 $menuLabel  = $option[0];
                 $menuAction = $option[1]->serialize(FALSE);
+                $menuIconClass = $option[2] ?? null;
 
-                $menu = "{label: '{$menuLabel}',";
+                $iconHtml = '';
+                if ($menuIconClass) {
+                    $iconHtml = "<i class='{$menuIconClass}'></i> ";
+                }
+                $displayMenuLabel = $iconHtml . $menuLabel;
+                $jsMenuLabel = addslashes($displayMenuLabel);
+
+                $menu = "{label: '{$jsMenuLabel}',";
                 $menu .= "action: function(id) { __adianti_ajax_exec('" . $menuAction . "&key=' + id); }}";
 
                 $menuItems[] = $menu;
@@ -189,8 +222,24 @@ class RecursiveDBTree extends TElement
             $label = $item->{$this->labelField};
             $parentKey = $item->{$this->parentKeyField};
 
+            $iconHtml = '';
+            $nodeIconClass = null;
+
+            if ($this->iconField && !empty($item->{$this->iconField})) {
+                $nodeIconClass = $item->{$this->iconField};
+            } elseif ($this->defaultTreeIconClass) {
+                $nodeIconClass = $this->defaultTreeIconClass;
+            }
+
+            if ($nodeIconClass) {
+                $iconHtml = "<i class='{$nodeIconClass}'></i> ";
+            }
+
+            $displayLabel = $iconHtml . $label;
+            $jsLabel = addslashes($displayLabel);
+
             // Build the tree node
-            $tree = "{$const}.add({label: '{$label}',";
+            $tree = "{$const}.add({label: '{$jsLabel}',";
             if ($parentKey != null) {
                 $tree .= "parent: '{$parentKey}',";
             }
