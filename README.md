@@ -14,6 +14,7 @@ The RecursiveDBTree plugin is a versatile and efficient solution tailored for th
 - **Intuitive Navigation:** Provides an intuitive interface for navigating through the tree structure.
 - **Easy Manipulation:** Allows for easy manipulation of tree elements, including adding, editing, and deleting nodes.
 - **Context Menu Options:** Offers context menu options for enhanced user interaction and management of tree nodes.
+- **Icon Support:** Allows adding Font Awesome icons to tree nodes and context menu options.
 
 ## Based on VanillaTree Library
 > This plugin is built upon the foundation of the [VanillaTree](https://github.com/finom/vanillatree) JavaScript library. Leveraging the capabilities of VanillaTree, the RecursiveDBTree component enhances the Adianti Framework by empowering developers to implement dynamic and interactive tree views effortlessly.
@@ -34,20 +35,21 @@ Insert statements to add data to the segment table, populating it with some exam
 CREATE TABLE IF NOT EXISTS `segment` (
   `id` int(11) NOT NULL,
   `parent_segment_id` int(11) DEFAULT NULL,
-  `description` varchar(200) COLLATE utf8_unicode_ci NOT NULL
+  `description` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `icon_class` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `segment` (`id`, `parent_segment_id`, `description`) VALUES
-(1, NULL, 'Transportation'),
-(2, 1, 'Executive'),
-(3, 1, 'Fractional'),
-(4, NULL, 'Information Technology'),
-(5, 4, 'Software'),
-(6, 4, 'Support and Maintenance'),
-(7, NULL, 'Retail'),
-(8, 7, 'Cleaning Supplies'),
-(16, 8, 'Chemicals'),
-(17, 16, 'Controlled');
+INSERT INTO `segment` (`id`, `parent_segment_id`, `description`, `icon_class`) VALUES
+(1, NULL, 'Transportation', 'fas fa-car'),
+(2, 1, 'Executive', NULL),
+(3, 1, 'Fractional', NULL),
+(4, NULL, 'Information Technology', 'fas fa-laptop-code'),
+(5, 4, 'Software', NULL),
+(6, 4, 'Support and Maintenance', NULL),
+(7, NULL, 'Retail', 'fas fa-store'),
+(8, 7, 'Cleaning Supplies', NULL),
+(16, 8, 'Chemicals', NULL),
+(17, 16, 'Controlled', NULL);
 
 
 ```
@@ -82,6 +84,7 @@ class Segment extends TRecord
         // Add attributes to the record
         parent::addAttribute('parent_segment_id'); // Parent segment ID
         parent::addAttribute('description'); // Segment description
+        parent::addAttribute('icon_class'); // Icon class for the segment
     }
 }
 
@@ -115,18 +118,22 @@ class SegmentTree extends TPage
         $panel = new TPanelGroup('Segment');
        
         // Create a RecursiveDBTree instance to display segments
-        $segment = new RecursiveDBTree('segment', 'app', 'Segment', 'id', 'parent_segment_id', 'description', 'id asc');
+        $segment = new RecursiveDBTree('segment', 'app', 'Segment', 'id', 'parent_segment_id', 'description', 'id asc', null, 'icon_class');
         $segment->collapse();
+        // $segment->setDefaultTreeIconClass('fas fa-folder'); // Optional: Set a default icon for all nodes
         
         // Set an action when selecting an item
         $segment->setItemAction(new TAction(array($this, 'onSelect')));
         
         // Add options to the context menu
-        $segment->addContextMenuOption('Edit', new TAction([$this, 'onEdit']));
-        $segment->addContextMenuOption('Delete', new TAction([$this, 'onDelete']));
-        $segment->addContextMenuOption('View', new TAction([$this, 'onView']));
+        $segment->addContextMenuOption('Edit', new TAction([$this, 'onEdit']), 'fas fa-edit');
+        $segment->addContextMenuOption('Delete', new TAction([$this, 'onDelete']), 'fas fa-trash-alt');
+        $segment->addContextMenuOption('View', new TAction([$this, 'onView']), 'fas fa-eye');
         
         $panel->add($segment);
+
+        // **Note on Font Awesome:** This plugin assumes that Font Awesome is already included in your Adianti Framework project.
+        // You might need to ensure it's loaded in your main template or page.
         
         // Wrap the page content using a vertical box
         $vbox = new TVBox;
@@ -177,6 +184,7 @@ class SegmentTree extends TPage
 
 ## Result
 > The result of the example
+> The tree will now display the specified Font Awesome icons next to each segment name and in the context menu options. (Note: Images below do not yet reflect this change).
 <img src="https://github.com/gtcesar/recursive-db-tree/blob/main/images/img1.png?raw=true">
 <img src="https://github.com/gtcesar/recursive-db-tree/blob/main/images/img2.png?raw=true">
 
